@@ -1,10 +1,21 @@
-import React, {useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import Link from 'next/link'
+import { getCategories } from '../services'
 
-const catgories = [{name: 'React', slug: "react"},
-{name: "Web Development", slug: "web-dev"}]
+
+// const catgories = [{name: 'React', slug: "react"},
+// {name: "Web Development", slug: "web-dev"}]
+
+
 
 const Header = () => {
+    const [categories, setCategories] = useState([])
+
+    useEffect(() => {
+      getCategories()
+        .then((newCategories) => setCategories(newCategories))
+    }, []);
+
   return (
     <div className='container mx-auto px-10 mb-4'>
         <div className='border-b w-full inline-block border-blue-400 py-6'>
@@ -16,7 +27,7 @@ const Header = () => {
                 </Link>
             </div>
             <div className="hidden md:float-left md:contents">
-                {catgories.map((category) =>(
+                {categories.map((category) =>(
                     <Link key={category.slug} 
                     href={`/category/${category.slug}`}>
                         <span className='md:float-right mt-1 align-middle text-white cursor-pointer ml-4'>
