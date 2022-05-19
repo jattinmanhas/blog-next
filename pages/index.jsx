@@ -10,6 +10,7 @@ import { FeaturedPosts } from '../sections'
 // ]
 
 export default function Home({ posts }) {
+  console.log(posts);
   return (
     <div className="container mx-auto mb-8 px-10">
       <Head>
@@ -26,7 +27,7 @@ export default function Home({ posts }) {
 
         <div className="col-span-1 lg:col-span-4">
           <div className="lg: relative sticky top-8">
-            <PostWidget />
+            <PostWidget categories={posts.categories} slug={posts.slug} />
             <Categories />
           </div>
         </div>
@@ -40,7 +41,7 @@ export async function getStaticProps() {
 
   return {
     props: { 
-      posts 
+       posts
     },
   }
 }
